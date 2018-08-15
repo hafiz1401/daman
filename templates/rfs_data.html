@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<!-- <h2><span class="label label-default">Data ODP</span></h2> -->
+<div class="container-fluid">
+
+    <form class="form" role="form" enctype=multipart/form-data action="/data_rfs/update" method="post" id="data_form">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+        	<div class="row">
+        		<div class="col-xs-2">
+			    	<h4><label for="odp_target" class="label label-default">{{ form.odp_target.label }}</label></h4>
+			    	<input type="text" class="form-control" name="odp_target" value="{{ data._id }}" readonly>
+			    	<br>
+			    </div>
+			    <div class="col-xs-1">
+		        	<h4><label for="kap" class="label label-default">{{ form.kap.label }}</label></h4>
+		        	<input type="text" class="form-control" name="kap" value="{{ nport }}" id="kap" readonly>
+		        </div>
+		        <div class="col-xs-1">
+		        	<h4><label for="used" class="label label-default">{{ form.used.label }}</label></h4>
+		        	<input type="text" class="form-control" name="used" value="{{ used }}" id="used" readonly>
+		        </div>
+		        <div class="col-xs-1">
+		        	<h4><label for="occu" class="label label-default">{{ form.occu.label }}</label></h4>
+		        	<input type="text" class="form-control" name="occu" value="{{ occu }}%" id="occu" readonly>
+		        </div>
+	        	<div class="col-xs-1">
+		        	<h4><label for="sto" class="label label-default">{{ form.sto.label }}</label></h4>
+		        	<input type="text" class="form-control" name="sto" value="{{ sto }}" id="sto" readonly>
+		        </div>
+			    <div class="col-xs-2">
+		        	<h4><label for="odc" class="label label-default">{{ form.odc.label }}</label></h4>
+		        	<input type="text" class="form-control" name="odc" value="{{ odc }}" id="odc" readonly>
+		        </div>
+			    <!-- <div class="col-xs-2 pull-right"> -->
+			    	<!-- <a class="btn btn-danger" href="{{ url_for('delete_odp', odp=data._id) }}">Delete ODP <span class="glyphicon glyphicon-trash"></span></a> -->
+			    	
+			    <!-- </div> -->
+			    <div class="col-xs-2">
+		        	<h4><label for="aktual_odp" class="label label-default">{{ form.aktual_odp.label }}</label></h4>
+		        	<input type="text" class="form-control" name="aktual_odp" value="{{ data.AKTUAL_ODP }}" readonly>
+		        </div>
+			    <div class="col-xs-2">
+		        	<h4><label for="tgl_survei" class="label label-default">{{ form.tgl_survei.label }}</label></h4>
+		        	<input type="date" class="form-control" name="tgl_survei" value="{{ data.TGAL_SURVEY }}" readonly>
+		        </div>
+
+			   </div>
+			<div class="row">
+        	   
+			    <div class="col-xs-2">
+		        	<h4><label for="tanggal_uim" class="label label-default">{{ form.tanggal_uim.label }}</label></h4>
+		        	<input type="date" class="form-control" name="tanggal_uim" value="{{ data.TANGGAL_UIM }}">
+		        </div>
+		        <div class="col-xs-2">
+		        	<h4><label for="uim" class="label label-default">{{ form.uim.label }}</label></h4>
+		        	<select class="form-control" name="uim" form="data_form">
+				        		{% if data.UIM == 'NOT OK' %}
+								<option selected>NOT OK</option>
+				        		<option>ON PROGRESS</option>
+				        		<option>OK</option>
+				        		<option>None</option>
+								{% elif data.UIM == 'OK' %}
+								<option>NOT OK</option>
+				        		<option>ON PROGRESS</option>
+				        		<option selected>OK</option>
+								<option>None</option>
+								{% elif data.UIM == 'ON PROGRESS' %}
+								<option>NOT OK</option>
+				        		<option selected>ON PROGRESS</option>
+				        		<option>OK</option>
+								<option>None</option>
+								{% else %}
+								<option>NOT OK</option>
+				        		<option>ON PROGRESS</option>
+				        		<option>OK</option>
+								<option selected></option>
+								{% endif %}
+				        </select>
+		        </div>
+		        <div class="col-xs-2">
+		        	<h4><label for="eksekutor" class="label label-default">{{ form.eksekutor.label }}</label></h4>
+		        	{% if data.EKSEKUTOR == '' or data.EKSEKUTOR == '0' or data.EKSEKUTOR == 'NONE' or data.EKSEKUTOR == '-' %}
+		        	<input type="text" class="form-control" name="eksekutor" value="{{ data.EKSEKUTOR }}">
+		        	{% else %}
+		        	<input type="text" class="form-control" name="eksekutor" value="{{ data.EKSEKUTOR }}" readonly>
+		        	{% endif %}
+		        </div>
+		        
+		       
+		        
+
+		        <div class="col-xs-2">
+		        	<h4><label for="port_olt" class="label label-default">{{ form.port_olt.label }}</label></h4>
+		        	<input type="text" class="form-control" name="port_olt" value="{{ data.PORT_OLT }}" readonly>
+		        	<br>
+		        </div>
+
+
+		        <div class="col-xs-2">
+		        	<h4><label for="label_odp" class="label label-default">{{ form.label_odp.label }}</label></h4>
+		        	<input type="text" class="form-control" name="label_odp" value="{{ data.LABEL }}" readonly>
+		        </div>
+		      
+			    <div class="col-xs-2">
+		        	<h4><label for="kendala" class="label label-default">{{ form.kendala.label }}</label></h4>
+		        	<textarea class="form-control" name="kendala">{{ data.KENDALA }}</textarea>
+		        </div>
+		        
+
+				
+				
+				<!-- <div class="col-xs-2"> -->
+		        <!-- <h1 type="hidden" id="kapc">{{ kap }}</h1> -->
+		    	<!-- </div> -->
+	        	
+	        	<input type="hidden" class="form-control" name="kapx" id="kapx" value="{{ kap }}">
+
+		    </div>
+        	</div>
+
+        	<table class="table table-hover">
+        		<thead>
+        			<tr id="field0" class="fil">
+        				<th width="1"><h4><span class="label label-default">Port</span></h4></th>
+        				<th><h4><span class="label label-default">Label Port</span></h4></th>
+        				<th><h4><span class="label label-default">Status</span></h4></th>
+        				<th><h4><span class="label label-default">No. Layanan</span></h4></th>
+        				<th><h4><span class="label label-default">Label Dropcore</span></h4></th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			{% for x in lis %}
+                    {% set idf = 'field'+ loop.index|string %}
+                    {% set idr = 'remove'+ loop.index|string %}
+                    {% set noport = 'PORT_'+x[10] %}
+                    {% set pid = 'p'+ loop.index|string %}
+                    {% set poid = 'p'+ loop.index|string +'po'%}
+                    {% set stid = 'p'+ loop.index|string +'st'%}
+                    {% set moid = 'p'+ loop.index|string +'mo'%}
+                    {% set noid = 'p'+ loop.index|string +'no'%}
+                    {% set drid = 'p'+ loop.index|string +'dr'%}
+                       <tr id="{{ idf }}" class="fil">
+                       
+        				<!-- <td><h4><span class="label label-primary">{{ loop.index }}</span></h4></td> -->
+        				<td><input type="text" class="form-control" name="{{ noport }}" value="{{ x[10] }}" id="{{ pid }}"></td>
+        				<td><input type="text" class="form-control" name="{{ x[5] }}" value="{{ x[0] }}" id="{{ poid }}" ></td>
+        				<td>
+        					<select class="form-control" name="{{ x[6] }}" value="{{ x[1] }}" id="{{ stid }}" form="data_form">
+				        		{% if x[1] == 'USED' %}
+								<option selected>USED</option>
+				        		<option>IDLE</option>
+				        		<option>-</option>
+								{% else %}
+								<option>USED</option>
+				        		<option selected>IDLE</option>
+								<option>-</option>
+								{% endif %}
+				        	</select>
+        				</td>
+        				<td><input type="text" class="form-control" name="{{ x[8] }}" value="{{ x[3] }}" id="{{ noid }}"></td>
+        				<td><input type="text" class="form-control" name="{{ x[9] }}" value="{{ x[4] }}" id="{{ drid }}"></td>
+        			
+        			
+                        
+                    {% endfor %}
+                          		
+        		</tbody>
+
+        	</table>
+
+        	
+		
+
+		
+         <button type="submit" class="btn btn-default btn-block" id='aa'><h4><strong>Save</strong></h4></button>
+       <br>
+    </form>
+    <br>
+    {% for odp in res_foto %}
+    <img src="/static/img/{{ odp }}" width="500">
+    {% endfor %}
+</div>
+
+{% endblock %}
+

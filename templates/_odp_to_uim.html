@@ -1,0 +1,15 @@
+<tr>
+    <td><strong>{{ pos }}</strong></td>
+    <td><strong>{{ odp._id }}</strong></td>
+    <td><strong>{{ odp.TGAL_SURVEY }}</strong></td>
+    <td><strong>{{ odp.TANGGAL_UIM }}</strong></td>
+    <td><strong>{{ odp.UIM.upper() }}</strong></td>
+    <td><strong>{{ odp.OCCU }}</strong></td>
+    <td><strong>{{ odp.EKSEKUTOR.upper() }}</strong></td>
+    <td>    
+    <a class="btn btn-info tooltip-test" title="Edit" href="{{ url_for('data_odp', odp=odp._id) }}"><span class="glyphicon glyphicon-edit"></span></a>
+    <!-- <a class="btn btn-danger tooltip-test" title="Delete" data-toggle="modal" data-target="#deleteModal" data-value="{{ odp._id }}"><span class="glyphicon glyphicon-trash"></span></a> -->
+    </td>
+</tr>
+
+                    

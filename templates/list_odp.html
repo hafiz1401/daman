@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<!-- <h1><span class="label label-info">Data ODP</span></h1> -->
+<h4><span class="label label-info">Total ODP tersimpan: {{ lngth }}</span></h4>
+
+<div class="container-fluid">
+    <form class="form" role="form" action="" method="post" id="list_form"> 
+        <div class="form-group">
+          <div class="row">
+            <!-- <label for="search"><span class="glyphicon glyphicon-search"></span></label> -->
+            <table class="table table-hover" style="">
+              <thead>
+                <tr>
+                  <th width="220"><input type="text" class="form-control" name="odptosearch" placeholder="Nama ODP"></th>
+                  <th width="150"><input type="text" class="form-control" name="tgltosearch" placeholder="Tanggal Survei"></th>
+                  <th width="240"><input type="text" class="form-control" name="onsitetosearch" placeholder="Regu"></th>
+                  <th width="50"><input type="text" class="form-control" name="kaptosearch" placeholder="Kap"></th>
+                  <th width="300"><input type="text" class="form-control" name="kendalatosearch" placeholder="Kendala"></th>
+                </tr>
+              </thead>
+              </table>
+            
+           <input type="hidden" class="form-control" name="id_db" value="{{ id_db }}">
+           <input type="hidden" class="form-control" name="tgal_db" value="{{ tgal_db }}">
+           <input type="hidden" class="form-control" name="onsite_db" value="{{ onsite_db }}">
+           <input type="hidden" class="form-control" name="kap_db" value="{{ kap_db }}">
+           <input type="hidden" class="form-control" name="kendala_db" value="{{ kendala_db }}">
+           
+            <button type="submit" class="btn btn-default btn-block" name="btn" value="searchodp"><strong>Search</strong></button>
+            <h4><span class="label label-info">Total ODP ditemukan: {{ lngthsearch }}</span></h4>
+            <button type="submit" class="btn btn-default btn-md pull-right" name="btn" value="extract"><strong>Extract</strong></button>
+            
+         </div>
+    
+            
+                   
+        
+      <a class="btn btn-info" href="{{ url_for('data_odp_new') }}"><span class="glyphicon glyphicon-plus"></span></a>
+          <table class="table table-hover" style="">
+            <thead>
+              <tr>
+                <th width="10">No</th>
+                <th width="220">Nama ODP</th>
+                <th width="150">Tanggal Survei</th>
+                <th width="240">Regu</th>
+                <th width="50">KAP</th>
+                <th width="300">Kendala</th>
+                <th width="100">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                    {% for odp in listodp %}
+                        {% set pos = loop.index %}
+                        {% include '_listodp.html' %}
+                    {% endfor %}
+            </tbody>
+          </table>
+
+          
+            
+
+    
+         
+       <br>
+    </form>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2\4 class="modal-title" id="deleteModalLabel">Konfirmasi</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="GET" action="">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label"></label>
+            <input type="hidden" class="form-control" id="recipient-name">
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <!-- <button type="button" class="btn btn-primary">Yes</button> -->
+        <a class="btn btn-danger" id="deleteLink" href="" >Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+{% endblock %}

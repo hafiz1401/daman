@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+	<h1>Log In</h1>
+	<div class="row">
+		<div class="col-md-4">
+			<form class="form" role="form" enctype=multipart/form-data action="" method="post" id="login_form">
+				<h4><label for="usr" class="label label-default">{{ form.username.label }}</label></h4>
+		    	<input type="text" class="form-control" name="usr">
+		    	<h4><label for="pwd" class="label label-default">{{ form.password.label }}</label></h4>
+		    	<input type="password" class="form-control" name="pwd">
+		    	<br>
+		    	<button type="submit" class="btn btn-default btn-block"><h4><strong>Save</strong></h4></button>
+			</form>
+		</div>
+	</div>
+	<br>
+	<!-- <p>New User? <a href="{{ url_for('register') }}">Create Account</a></p> -->
+{% endblock %}

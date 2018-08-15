@@ -1,0 +1,62 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+	{% if title %}
+	{{ title }} - DAMAN APP
+	{% else %}
+	Welcome
+	{% endif %}
+{% endblock %}
+
+{% block navbar %}
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toogle Navigation</span>
+					<span class="icon-bar">A</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="{{ url_for('index') }}" class="navbar-brand">DAMAN</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					{% if session['acc_type'] == "admin" %}
+					<li><a href="{{ url_for('list_odp') }}">Valdat ODP</a></li>
+					<li><a href="{{ url_for('odp_to_uim') }}">RFS DAVA</a></li>
+					{% elif session['acc_type'] == "valdat" %}
+					<li><a href="{{ url_for('list_odp') }}">Valdat ODP</a></li>
+					{% elif session['acc_type'] == "rfs" %}
+					<li><a href="{{ url_for('odp_to_uim') }}">RFS DAVA</a></li>
+					{% endif %}
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					{% if session['username']  %}
+					<li class="pull-right"><a href=""><span class="glyphicon glyphicon-user"></span> {{ session['username']}}</a></li>
+					{% if session['acc_type'] == "admin" %}
+					<li class="pull-right"><a href="{{ url_for('register') }}"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
+					{% endif %}
+					<li class="pull-right"><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+					{% else %}
+					<li class="pull-right"><a href="{{ url_for('login') }}">Log In <span class="glyphicon glyphicon-log-in"></span></a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid" style="background-color: rgba(255, 255, 255, 0.80);">
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+	{% for message in messages %}
+			<div class="alert alert-info" role="alert">{{ message }}</div>
+			{% endfor %}
+		{% endif %}
+		{% endwith %}
+
+		{% block app_content %}{% endblock %}
+	</div>
+{% endblock %}
