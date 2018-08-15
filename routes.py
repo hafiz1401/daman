@@ -134,7 +134,7 @@ def data_odp(odp):
 		return redirect(url_for('login'))
 	else:
 		form = ODPForm()
-		data = mongo.db.dataodpmaster.find_one({ 'NAMAODP':  odp })
+		data = mongo.db.dataodpmaster.find_one({ '_id':  odp })
 		lis = []
 		if data:
 
