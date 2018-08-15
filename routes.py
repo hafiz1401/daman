@@ -134,7 +134,7 @@ def data_odp(odp):
 		return redirect(url_for('login'))
 	else:
 		form = ODPForm()
-		data = mongo.db.dataodpmaster.find_one({ '_id':  odp })
+		data = mongo.db.dataodpmaster.find_one({ 'NAMAODP':  odp })
 		lis = []
 		if data:
 
@@ -190,6 +190,7 @@ def data_odp(odp):
 			tanjung = ["RTA","KDG","PGN","BNG","KGN","NEG","BRI","AMT","PAR","TTG","TJT","TJL"]
 			banjarbaru = ["LUL","LDU","BBR","BJB","MTP","MRB"]
 			banjarmasin = ["KYG","ULI","BJM","KYI","ULN","GBT","GMB"]
+			
 			if sto in batulicin:
 				datel = 'BATULICIN'
 			elif sto in tanjung:
@@ -200,8 +201,9 @@ def data_odp(odp):
 				datel = 'BANJARMASIN'
 			else:
 				datel = ''
+
 			try:
-				nama_odp = data['_id'].replace('/','-')
+				nama_odp = data['NAMAODP'].replace('/','-')
 				list_foto = os.listdir(os.getcwd()+'\\app\\static\\img')
 				res_foto =  [i for i in list_foto if str(nama_odp) in i]
 				print res_foto
